@@ -1,10 +1,18 @@
 import { client, connect } from './connect';
 import { logger } from './logger';
 import { validate } from './validation';
+require('dotenv').config();
+
+const dbName = process.env.DB_NAME;
+const collectionName = process.env.COLLECTION_NAME;
 
 export const bulkInsert = async (data) => {
+  let isConnected = false;
+
   try {
     await connect();
+    isConnected = true;
+
     const collection = client.db(dbName).collection(collectionName);
 
     const validData = data.filter((entry) => validate(entry));
@@ -16,5 +24,9 @@ export const bulkInsert = async (data) => {
     logger.info(`${validData.length} records inserted successfully`);
   } catch (error) {
     logger.error('Error during bulk insert:', error);
+  } finally {
+    if (isConnected) {
+      await client.close();
+    }
   }
 };

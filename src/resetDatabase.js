@@ -1,6 +1,10 @@
 import { client, connect } from './connect';
 import { logger } from './logger';
 import inquirer from 'inquirer';
+require('dotenv').config();
+
+const dbName = process.env.DB_NAME;
+const collectionName = process.env.COLLECTION_NAME;
 
 export const resetDatabase = async () => {
   try {
@@ -16,9 +20,10 @@ export const resetDatabase = async () => {
         .db(dbName)
         .collection(collectionName)
         .deleteMany({});
-      console.log(`Deleted ${result.deletedCount} records.`);
+
+      logger.info(`Deleted ${result.deletedCount} records.`);
     } else {
-      console.log('Database reset cancelled.');
+      logger.info('Database reset cancelled.');
     }
   } catch (error) {
     logger.error('Error during database reset:', error);

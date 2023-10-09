@@ -1,5 +1,9 @@
 import { client, connect } from './connect';
 import { logger } from './logger';
+require('dotenv').config();
+
+const dbName = process.env.DB_NAME;
+const collectionName = process.env.COLLECTION_NAME;
 
 export const searchStatementsByContent = async (query) => {
   try {

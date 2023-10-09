@@ -1,4 +1,4 @@
-import { client, connect } from './connect';
+import { client, connect, dbName, collectionName } from './connect';
 import { logger } from './logger';
 
 export const visualizeActorProgress = async (actorId) => {
@@ -10,7 +10,7 @@ export const visualizeActorProgress = async (actorId) => {
       .sort({ timestamp: 1 })
       .toArray();
 
-    console.log(progressData);
+    logger.info('Successfully retrieved actor progress data.');
     return progressData;
   } catch (error) {
     logger.error('Error visualizing actor progress:', error);

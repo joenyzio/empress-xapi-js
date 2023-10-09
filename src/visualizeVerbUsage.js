@@ -13,7 +13,7 @@ export const visualizeVerbUsage = async (filter) => {
       ])
       .toArray();
 
-    console.log(verbUsage);
+    logger.info(`Verb usage data: ${JSON.stringify(verbUsage)}`);
     return verbUsage;
   } catch (error) {
     logger.error('Error visualizing verb usage:', error);

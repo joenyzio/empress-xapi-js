@@ -1,5 +1,9 @@
 import { client, connect } from './connect';
 import { logger } from './logger';
+require('dotenv').config();
+
+const dbName = process.env.DB_NAME;
+const collectionName = process.env.COLLECTION_NAME;
 
 export const getMostActiveActors = async () => {
   try {
@@ -12,10 +16,11 @@ export const getMostActiveActors = async () => {
       ])
       .toArray();
 
-    console.log(actors);
+    logger.info('Most active actors retrieved successfully.');
     return actors;
   } catch (error) {
     logger.error('Error fetching most active actors:', error);
+    return null;
   } finally {
     await client.close();
   }

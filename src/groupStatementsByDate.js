@@ -1,5 +1,9 @@
 import { client, connect } from './connect';
 import { logger } from './logger';
+require('dotenv').config();
+
+const dbName = process.env.DB_NAME;
+const collectionName = process.env.COLLECTION_NAME;
 
 export const groupStatementsByDate = async (filter, granularity) => {
   // This will group by day as an example
@@ -20,10 +24,14 @@ export const groupStatementsByDate = async (filter, granularity) => {
     await connect();
     const collection = client.db(dbName).collection(collectionName);
     const results = await collection.aggregate([groupBy]).toArray();
-    console.log(results);
+
+    logger.info(
+      `Grouped statements by date. Retrieved ${results.length} groupings.`,
+    );
     return results;
   } catch (error) {
     logger.error('Error grouping statements by date:', error);
+    return null;
   } finally {
     await client.close();
   }
