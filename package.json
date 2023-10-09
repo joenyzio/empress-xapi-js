@@ -1,0 +1,28 @@
+{
+  "name": "empress-xapi",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Joe Nyzio",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/cli": "^7.23.0",
+    "@babel/core": "^7.23.0",
+    "@babel/eslint-parser": "^7.22.15",
+    "@babel/eslint-plugin": "^7.22.10",
+    "@babel/preset-env": "^7.22.20",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^8.51.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-prettier": "^5.0.0",
+    "prettier": "^3.0.3"
+  },
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "mongodb": "^6.1.0"
+  }
+}
